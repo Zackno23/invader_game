@@ -1,3 +1,11 @@
+
+
+'''
+9/25
+後で変数名等リファクタリングが必要
+
+'''
+
 import pygame
 from pygame.locals import *
 
