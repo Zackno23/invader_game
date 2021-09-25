@@ -30,18 +30,13 @@ while running:
             running = False
 
         if event.type == KEYDOWN:
-            print("a")
             if event.key == K_RIGHT:
-                print("b")
                 screen.fill((255, 0, 0))
             if event.key == K_LEFT:
-                print("c")
                 screen.fill((0, 255, 0))
             if event.key == K_UP:
-                print("d")
                 screen.fill((0, 0, 255))
             if event.key == K_DOWN:
-                print("e")
                 screen.fill((0, 0, 0))
     pygame.display.update()
 

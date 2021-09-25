@@ -2,11 +2,12 @@
 '''
 9/25
 後で変数名等リファクタリングが必要
-・条件分岐からplayerを動かす
-・pygame.key.get_pressed()でのプレイヤー操作
-・移動速度の調整と、初期位置の調整
-・画面内から出ていってしまう問題の解決
-・敵の表示・移動（左右のみ➛近づいてくる）
+[]条件分岐からplayerを動かす
+[]連続して描画されちゃう問題の解決（screen.fillの場所）
+[]pygame.key.get_pressed()でのプレイヤー操作
+[]移動速度の調整と、初期位置の調整
+[]画面内から出ていってしまう問題の解決
+[]敵の表示・移動（左右のみ➛近づいてくる）
 '''
 
 import pygame
@@ -33,18 +34,13 @@ while running:
         if event.type == QUIT:
             running = False
         if event.type == KEYDOWN:
-            print("a")
             if event.key == K_RIGHT:
-                print("b")
                 screen.fill((255, 0, 0))
             if event.key == K_LEFT:
-                print("c")
                 screen.fill((0, 255, 0))
             if event.key == K_UP:
-                print("d")
                 screen.fill((0, 0, 255))
             if event.key == K_DOWN:
-                print("e")
                 screen.fill((0, 0, 0))
     pygame.display.update()
 
