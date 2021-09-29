@@ -1,5 +1,3 @@
-
-
 '''
 9/25
 後で変数名等リファクタリングが必要
@@ -14,35 +12,26 @@ pygame.display.set_caption("インベーダーゲーム")
 screen.fill((0, 0, 0))
 
 player = pygame.image.load("player.png")
-enemy = pygame.image.load("enemy.png")
+playerX = 100
+playerY = 200
 
-playerX = 200
-playerY = 100
-
-enemyX = 100
-enemyY = 200
 
 running = True
 
 while running:
+    screen.blit(player, (playerX, playerY))
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
 
         if event.type == KEYDOWN:
-            print("a")
             if event.key == K_RIGHT:
-                print("b")
+                playerX += 1
                 screen.fill((255, 0, 0))
             if event.key == K_LEFT:
-                print("c")
                 screen.fill((0, 255, 0))
             if event.key == K_UP:
-                print("d")
                 screen.fill((0, 0, 255))
             if event.key == K_DOWN:
-                print("e")
                 screen.fill((0, 0, 0))
     pygame.display.update()
-
-
