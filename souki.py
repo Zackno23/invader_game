@@ -1,13 +1,25 @@
-
 '''
-9/25
-後で変数名等リファクタリングが必要
-[]条件分岐からplayerを動かす
-[]連続して描画されちゃう問題の解決（screen.fillの場所）
-[]pygame.key.get_pressed()でのプレイヤー操作
-[]移動速度の調整と、初期位置の調整
-[]画面内から出ていってしまう問題の解決
-[]敵の表示・移動（左右のみ➛近づいてくる）
+10 / 9
+[]弾の発射
+    ロード
+    ブリット
+[]連続で弾を撃てるようにするには
+[]まずはenemyを止めながらやってみよう
+[]弾表示の仕組み
+    弾の座標をリストに格納
+    リスト全体に移動の処理をする
+    リスト全体をの座標情報を元に描画（blit）
+    弾がenemyにぶつかっていないかチェック
+        ぶつかったらリストから削除
+        三平方の定理・・・モンテカルロ法の話
+    リストの中で一番最初の要素が画面外に行っていないかチェック
+        画面外だったらリストから削除
+    continueについての説明
+[]enemyを動かして動作チェック
+[]得点機能追加
+
+＜時間があれば＞
+連打による処理低下の防ぎ方
 '''
 
 import pygame
@@ -16,7 +28,6 @@ from pygame.locals import *
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("インベーダーゲーム")
 screen.fill((0, 0, 0))
-
 
 player = pygame.image.load("player.png")
 enemy = pygame.image.load("enemy.png")
@@ -37,7 +48,7 @@ while running:
     if enemyX >= 800 or enemyX <= 0:
         enemyY += enemy.get_height()
         direction *= -1
-    enemyX +=  direction
+    enemyX += direction
 
     key_pressed = pygame.key.get_pressed()
     if key_pressed[K_RIGHT]:
@@ -48,32 +59,10 @@ while running:
         if playerX > 0:
             playerX -= 1
 
-
     screen.blit(player, (playerX, playerY))
     screen.blit(enemy, (enemyX, enemyY))
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
-<<<<<<< HEAD
-        # if event.type == KEYDOWN:
-        #     if event.key == K_RIGHT:
-        #         screen.fill((255, 0, 0))
-        #         playerX += 3
-        #     if event.key == K_LEFT:
-        #         screen.fill((0, 255, 0))
-        #         playerX -= 3
 
-=======
-        if event.type == KEYDOWN:
-            if event.key == K_RIGHT:
-                screen.fill((255, 0, 0))
-            if event.key == K_LEFT:
-                screen.fill((0, 255, 0))
-            if event.key == K_UP:
-                screen.fill((0, 0, 255))
-            if event.key == K_DOWN:
-                screen.fill((0, 0, 0))
->>>>>>> 95429fbdc23f2fdd9626dadb775cad335949ba00
     pygame.display.update()
-
-
