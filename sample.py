@@ -1,22 +1,20 @@
 import pygame
+from pygame import mixer
 import random
 import math
 
-# Initialize the pygame
 pygame.init()
 
-# create the screen
 screen = pygame.display.set_mode((800, 600))
-
-# Title
-pygame.display.set_caption('Space Invaders')
+# screen.fill((150, 150, 150))
+pygame.display.set_caption ('Invaders Game')
 
 # Player
 playerImg = pygame.image.load('player.png')
 playerX, playerY = 370, 480
 playerX_change = 0
 
-# Enemy
+# 敵
 enemyImg = pygame.image.load('enemy.png')
 enemyX = random.randint(0, 736)
 enemyY = random.randint(50, 150)
@@ -28,7 +26,7 @@ bulletX, bulletY = 0, 480
 bulletX_change, bulletY_change = 0, 3
 bullet_state = 'ready'
 
-# Score
+# 点数
 score_value = 0
 
 
@@ -46,6 +44,7 @@ def fire_bullet(x, y):
     screen.blit(bulletImg, (x + 16, y + 10))
 
 
+# 敵がぶつかったとき
 def isCollision(enemyX, enemyY, bulletX, bulletY):
     distance = math.sqrt(math.pow(enemyX - bulletX, 2) + math.pow(enemyY - bulletY, 2))
     if distance < 27:
@@ -54,27 +53,28 @@ def isCollision(enemyX, enemyY, bulletX, bulletY):
         return False
 
 
-# Game Loop
 running = True
 while running:
-    # RGB = Red, Green, Blue
     screen.fill((0, 0, 0))
-    # playerX += 0.1
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                playerX_change = -2.5
+                playerX_change = -1.5
             if event.key == pygame.K_RIGHT:
-                playerX_change = 2.5
+                playerX_change = 1.5
             if event.key == pygame.K_SPACE:
                 if bullet_state == 'ready':
                     bulletX = playerX
                     fire_bullet(bulletX, bulletY)
 
-    # Player
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                playerX_change = 0
+                # Player
     playerX += playerX_change
     if playerX <= 0:
         playerX = 0
@@ -85,11 +85,11 @@ while running:
     if enemyY > 440:
         break
     enemyX += enemyX_change
-    if enemyX <= 0:
-        enemyX_change = 4
+    if enemyX <= 0:  # 左端に来たら
+        enemyX_change = 2
         enemyY += enemyY_change
-    elif enemyX >= 736:
-        enemyX_change = -4
+    elif enemyX >= 736:  # 右端に来たら
+        enemyX_change = -2
         enemyY += enemyY_change
 
     collision = isCollision(enemyX, enemyY, bulletX, bulletY)
@@ -99,7 +99,6 @@ while running:
         score_value += 1
         enemyX = random.randint(0, 736)
         enemyY = random.randint(50, 150)
-    enemy(enemyX, enemyY)
 
     # Bullet Movement
     if bulletY <= 0:
@@ -112,8 +111,10 @@ while running:
 
         # Score
     font = pygame.font.SysFont(None, 32)  # フォントの作成　Noneはデフォルトのfreesansbold.ttf
-    score = font.render("Score : " + str(score_value), True, (255, 255, 255))  # テキストを描画したSurfaceの作成
+    score = font.render(f"Score : {str(score_value)}", True, (255, 255, 255))  # テキストを描画したSurfaceの作成
     screen.blit(score, (20, 50))
 
     player(playerX, playerY)
+    enemy(enemyX, enemyY)
+
     pygame.display.update()
