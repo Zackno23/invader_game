@@ -39,8 +39,7 @@
 []得点機能追加
 
 ＜時間があれば＞
-連打による処理低下の防ぎ方
->>>>>>> 56faa01bc77a71c57327af8971d0fec40b4cff3e
+連打による処理低下の
 '''
 import math
 
@@ -55,7 +54,6 @@ player = pygame.image.load("player.png")
 enemy = pygame.image.load("enemy.png")
 bullet = pygame.image.load("bullet.png")
 
-
 player_X = 400 - player.get_width() / 2
 player_Y = 500
 
@@ -68,7 +66,6 @@ bullet_Y = player_Y - bullet.get_height()
 
 running = True
 fire = False
-
 
 direction = 0.3
 
@@ -94,20 +91,16 @@ while running:
     screen.blit(player, (player_X, player_Y))
     screen.blit(enemy, (enemy_X, enemy_Y))
 
-
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
         if event.type == KEYDOWN:
             if event.key == K_SPACE:
-                fire = True
-
-                if fire == False:
+                if not fire:
                     bullet_X = player_X + player.get_width() / 2 - bullet.get_width()
                     fire = True
 
-
-    if fire == True:
+    if fire:
         screen.blit(bullet, (bullet_X, bullet_Y))
         bullet_Y -= 0.5
         if bullet_Y <= 0:
@@ -124,10 +117,5 @@ while running:
         if math.sqrt(math.pow(enemy_centerX - bullet_centerX, 2) + math.pow(enemy_centerY - bullet_centerY, 2)) <= 150:
             hit_number += 1
             print(hit_number)
-
-
-
-
-
 
     pygame.display.update()

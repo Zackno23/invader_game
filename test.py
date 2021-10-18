@@ -1,6 +1,5 @@
 '''
-１０月８日
-弾発射機能・着弾機能
+10月２０日平舘用　弾発射機能
 
 player_speed, bullet_speed, enemy_speedの変数を追加
 
@@ -14,7 +13,6 @@ import math
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("インベーダーゲーム")
 screen.fill((0, 0, 0))
-
 # 画像をロード
 player = pygame.image.load("player.png")
 
@@ -50,6 +48,7 @@ while running:
     screen.blit(enemy, (enemyX, enemyY))
     screen.blit(tekitou_surface, (screen.get_width()/2, screen.get_height()/2))
 
+
     # bullet_listをもとに弾を表示
     for i in bullet_list:
         screen.blit(bullet, i)
@@ -62,29 +61,24 @@ while running:
         bullet_centerX, bullet_centerY = i[0] + bullet.get_width() / 2, i[1] + bullet.get_height() / 2
         # 三平方の定理　・・・モンテカルロ法の話
         distance = math.sqrt(math.pow(enemy_centerX - bullet_centerX, 2) + math.pow(enemy_centerY - bullet_centerY, 2))
-        # print(distance)
+
         # 当たり判定を調整
-        if distance <= 30:
+        if distance <= 30 or i[1] <= 0:
             bullet_list.remove(i)
-        i[1] -= bullet_speed
+        else:
+            i[1] -= bullet_speed
 
     # 現在押されているキーをリストに保存
     key_pressed = pygame.key.get_pressed()
     # 右キーが押されたとき
-<<<<<<< HEAD
-    if key_pressed[K_RIGHT] == 1:
-        playerX += 1
-    # 左キーが押されたとき
-    if key_pressed[K_LEFT] == 1:
-        playerX -= 1
-=======
+
+
     if key_pressed[K_RIGHT]:
         playerX += player_speed
     if key_pressed[K_LEFT]:
         playerX -= player_speed
 
     # イベント取得
->>>>>>> 56faa01bc77a71c57327af8971d0fec40b4cff3e
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
