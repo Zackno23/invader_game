@@ -2,7 +2,27 @@
 10/1
 pygame.key.get_pressedでの移動まで
 
-[]enemyの移動
+[]screen.fill((0, 0, 0))の追加
+    移動ができるようになるが、弾が一瞬できえる
+[]bulletX bulletYの定義
+    まずはwhileの外で
+[]while文のplayer, enemyの下にbulletのblit文を入れる
+[]shoot変数を作成 スペースキーが押されたときの処理にTrueにする
+[]if shoot == True:のステートメントを作る for文の前
+    bulletをblit
+[]bullet_speed = 1 として、↑のif文でbulletY -= bullet_speed
+    連射できない 一発しか打てない
+    bulletXが変わらない
+
+[]連射できない
+    弾が上の端っこまで行ったら、
+    ・shootをFalseに戻す
+    ・bulletYをもとに戻す
+[]bulletXが変わらない
+    spaceが押されたときのところに移動
+
+
+
 []enemyがはみ出ないように
 []弾の発射
     ロード
@@ -38,11 +58,11 @@ player = pygame.image.load("player.png")
 enemy = pygame.image.load("enemy.png")
 bullet = pygame.image.load("bullet.png")
 
-playerX = 400 - player.get_width()/2
+playerX = 400 - player.get_width() / 2
 playerY = 500
 
-enemyX = 300
-enemyY = 400
+enemyX = 400 - player.get_width() / 2
+enemyY = 100
 
 running = True
 
@@ -61,13 +81,13 @@ while running:
         if playerX > 0:
             playerX -= 0.1
 
-
     screen.blit(player, (playerX, playerY))
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
         if event.type == KEYDOWN:
             if event.key == K_SPACE:
-                screen.blit(bullet,(playerX + player.get_width() / 2 - bullet.get_width() / 2, playerY - bullet.get_height()))
+                screen.blit(bullet,
+                            (playerX + player.get_width() / 2 - bullet.get_width() / 2, playerY - bullet.get_height()))
 
     pygame.display.update()

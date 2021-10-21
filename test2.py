@@ -58,19 +58,20 @@ enemyY  = 100
 running = True
 shoot = False
 bulletX = playerX + (player.get_width() - bullet.get_width()) / 2
-
 bulletY = playerY - bullet.get_height()
-while running:
 
+player_speed = 1
+enemy_speed = 1
+bullet_speed = 1
+while running:
     screen.fill((0, 0, 0))
     screen.blit(player, (playerX, playerY))
-
-
+    screen.blit(enemy, (enemyX, enemyY))
     # 押されたキーを調べる
     key_pressed = pygame.key.get_pressed()
     if shoot:
         screen.blit(bullet, (bulletX, bulletY))
-        bulletY -= .1
+        bulletY -= bullet_speed
         if bulletY <= 0:
             shoot = False
             bulletY = playerY - bullet.get_height()
@@ -91,11 +92,6 @@ while running:
         if event.type == KEYDOWN:
             if event.key == K_SPACE:
                 bulletX = playerX + (player.get_width() - bullet.get_width()) / 2
-
                 shoot = True
-
-
-
-
 
     pygame.display.update()
