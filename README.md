@@ -1,4 +1,5 @@
-#Pygame tutorial --invader game
+##Pygame tutorial --invader game
+<br>
 This project belongs to the kids procramming school AxcelCamp Hachimantai, Iwate, Japan<br>
 このプロジェクトは岩手県八幡平市の子供向けプログラミング教室「アクセルキャンプ」によるものです。<br>
 
