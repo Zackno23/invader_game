@@ -18,9 +18,13 @@ The only thing it's hard for little kids to understand is the three square theor
 The main purpose of this project is to learn the basic syntax of python and pygame structure.<br>
 このプロジェクトの主目的は、pythonの基本文法とpygameを学ぶことになります。<br>
 <br>
--You can shoot when you press space bar スペースバーを押すと打てます
--You can move your spaceship by pressing left or right 左右の矢印を押すと移動できます。
--Score will be increased each time you hit the enemy 敵に当たると点数が増えます。
+- リスト1
+    - ネスト リスト1_1
+        - ネスト リスト1_1_1
+        - ネスト リスト1_1_2
+    - ネスト リスト1_2
+- リスト2
+- リスト3
 <br>
 <br>
 
